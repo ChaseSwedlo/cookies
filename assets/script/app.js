@@ -13,10 +13,8 @@ const savePref = document.querySelector('.savePref');
 let noCookies = false;
 
 function showPopup() {
-    if(document.cookie.length === 0) {
-        cookiePopup.classList.remove('hidden');
-        cookiePopup.classList.add('shown');
-    }
+    cookiePopup.classList.remove('hidden');
+    cookiePopup.classList.add('shown');
 }
 
 function checkAllCookies() {
@@ -40,48 +38,84 @@ function setCookie (name, value, maxAge) {
     document.cookie = cookieString;
 }
 
-function getCookies(name) {
+function getCookie(name) {
     const cookieName = name.replace(/([.*+?^${}()|[\]/\\])/g, '\\$1');
     const match = document.cookie.match(new RegExp(`(?:^|;\\s*)${cookieName}=([^;]*)`));
     return match ? `${name} = ${decodeURIComponent(match[1])}` : 'No cookies with that name';
 }
 
+function getBrowser() {
+    const userAgent = navigator.userAgent;
+    const browserMapping = {
+        'Edge': 'Edge',
+        'Edg': 'Edge',
+        'OPR': 'Opera',
+        'Chrome': 'Chrome',
+        'Firefox': 'Firefox',
+        'Safari': 'Safari'
+    };
+    let browserName = Object.keys(browserMapping).find(key => userAgent.includes(key)) || 'Unidentified';
+    return browserMapping[browserName];
+}
+
+function getOperatingSystem() {
+    let plat = navigator.userAgent.toLowerCase();
+    let os = navigator.userAgent;
+    const systems = ['win', 'mac', 'linux', 'android', 'iphone'];
+    const name = ['Windows', 'Mac', 'Linux', 'Android', 'IOS'];
+    for(let i = 0; i < systems.length; i++) {
+        if(plat.includes(systems[i])) {
+            os = name[i];
+            break;
+        }
+    }
+    return os;
+}
+
+function getWidth() {
+    return `${window.innerWidth}px`;
+}
+
+function getHeight() {
+    return `${window.innerHeight}px`;
+}
+
 function setAcceptedCookies() {
     let cookieCounter = 0;
     if(browserToggle.checked) {
-        setCookie('Browser', 'Chorme', 15);
+        setCookie('Browser', getBrowser(), 15);
         cookieCounter++;
     }
     if(osToggle.checked) {
-        setCookie('OperatingSystem', 'Win', 15);
+        setCookie('OperatingSystem', getOperatingSystem(), 15);
         cookieCounter++;
     }
     if(widthToggle.checked) {
-        setCookie('Width', '1920', 15);
+        setCookie('Width', getWidth(), 15);
         cookieCounter++;
     }
     if(heightToggle.checked) {
-        setCookie('Height', '1080', 15);
+        setCookie('Height', getHeight(), 15);
         cookieCounter++;
     }
     if(cookieCounter === 0) {
-        console.log('test');
         setCookie('RejectedAll', 'true', 15);
     }
 }
 
 function setAllCookies() {
-    setCookie('Browser', 'Chorme', 15);
-    setCookie('OperatingSystem', 'Win', 15);
-    setCookie('Width', '1920', 15);
-    setCookie('Height', '1080', 15);
+    setCookie('Browser', getBrowser(), 15);
+    setCookie('OperatingSystem', getOperatingSystem(), 15);
+    setCookie('Width', getWidth(), 15);
+    setCookie('Height', getHeight(), 15);
 }
 
 window.onload = function() {
-    setTimeout(showPopup, 1000);
-    checkAllCookies();
-    console.log(document.cookie.length);
-  };
+    if(document.cookie.length === 0 && navigator.cookieEnabled) {
+        setTimeout(showPopup, 1000);
+        checkAllCookies();
+    }
+};
 
 settingsButton.addEventListener('click', (event) => {
     event.preventDefault();
@@ -102,4 +136,12 @@ savePref.addEventListener('click', (event) => {
     cookiePopup.classList.add('hidden');
     setAcceptedCookies();
 });
-console.log(document.cookie);
+
+function printAllCookies() {
+    console.log(getCookie('Browser'));
+    console.log(getCookie('OperatingSystem'));
+    console.log(getCookie('Width'));
+    console.log(getCookie('Height'));
+    console.log(getCookie('RejectedAll'));
+}
+printAllCookies();
