@@ -1,0 +1,2 @@
+In this project, I practice using cookies to store information about user’s device, browser, and
+operating system. When a cookie is made the lifespan of it is set to 15 seconds for testing purposes. Try the project [here](https://chaseswedlo.github.io/cookies/)

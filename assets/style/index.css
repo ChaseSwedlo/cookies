@@ -5,19 +5,12 @@
     --font-color: rgb(255, 255, 255);
     --off-white: rgb(248, 248, 250);
     --header-height: 54px;
-    --main-blue: #3C57FF;
+    --main-blue: rgb(60, 87, 255);
 }
 
 .container {
     width: min(100% - 40px, 1080px);
     margin-inline: auto;
-}
-
-.center {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 body {
@@ -49,12 +42,12 @@ section {
 }
 
 .orange {
-    color: orange;
+    color: rgb(255, 165, 0);
     text-decoration: underline;
 }
 
 .green {
-    color: green;
+    color: rgb(0, 128, 0);
     text-decoration: underline;
 }
 
@@ -82,7 +75,7 @@ section {
     border: 1px solid rgba(0, 0, 0, 0.105);
     transform: translateY(-10px);
     transition-duration: 0.5s;
-    color: black;
+    color: rgb(0, 0, 0);
     padding: 25px;
     border-radius: 6px;
 }
@@ -110,7 +103,7 @@ form button {
 }
 
 .accept {
-    background-color: #3C57FF;
+    background-color: rgb(60, 87, 255);
     color: var(--off-white);
     font-size: 14px;
     border: 2px solid rgba(255, 255, 255, 0);
@@ -120,20 +113,20 @@ form button {
 
 .accept:hover {
     background-color: var(--off-white);
-    color: #3C57FF;
-    border-color: #3C57FF;
+    color: rgb(60, 87, 255);
+    border-color: rgb(60, 87, 255);
 }
 
 .settings {
     background-color: var(--off-white);
-    color: #3C57FF;
+    color: rgb(60, 87, 255);
     font-size: 14px;
-    border: 2px solid #3C57FF;
+    border: 2px solid rgb(60, 87, 255);
     transition-duration: 0.2s;
 }
 
 .settings:hover {
-    background-color: #3C57FF;
+    background-color: rgb(60, 87, 255);
     color: var(--off-white);
 }
 
@@ -202,16 +195,16 @@ ul li p {
     width: 18px;
     height:18px;
     border-radius: 50%;
-    background-color: #ffffff;
+    background-color: rgb(255, 255, 255);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: transform 0.4s ease;
 }
   
-.toggle-input:checked + .toggle-label { /*Changes color when checked*/
+.toggle-input:checked + .toggle-label {
     background-color: var(--main-blue);
 }
   
-.toggle-input:checked + .toggle-label:before { /*Moves the dial 26px on the X axis*/
+.toggle-input:checked + .toggle-label:before {
     transform: translateX(26px);
 }
 

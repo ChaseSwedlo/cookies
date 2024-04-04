@@ -1,5 +1,6 @@
 'use strict';
 
+const mainBox = document.querySelector('.main-box');
 const acceptButton = document.querySelector('.accept');
 const settingsButton = document.querySelector('.settings');
 const contentOne = document.querySelector('.content-one');
@@ -15,6 +16,13 @@ let noCookies = false;
 function showPopup() {
     cookiePopup.classList.remove('hidden');
     cookiePopup.classList.add('shown');
+    mainBox.classList.add('translateY');
+}
+
+function hidePopup() {
+    cookiePopup.classList.remove('shown');
+    cookiePopup.classList.add('hidden');
+    mainBox.classList.remove('translateY');
 }
 
 function checkAllCookies() {
@@ -125,15 +133,13 @@ settingsButton.addEventListener('click', (event) => {
 
 acceptButton.addEventListener('click', (event) => {
     event.preventDefault();
-    cookiePopup.classList.remove('shown');
-    cookiePopup.classList.add('hidden');
+    hidePopup();
     setAllCookies();
 });
 
 savePref.addEventListener('click', (event) => {
     event.preventDefault();
-    cookiePopup.classList.remove('shown');
-    cookiePopup.classList.add('hidden');
+    hidePopup();
     setAcceptedCookies();
 });
 
